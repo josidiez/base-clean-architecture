@@ -1,1 +1,0 @@
-# base-clean-architecture
