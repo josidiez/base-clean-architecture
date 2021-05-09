@@ -1,0 +1,36 @@
+import org.gradle.api.tasks.bundling.Jar
+
+apply plugin: 'org.springframework.boot'
+
+task classpathJar(type: Jar) {
+    inputs.files sourceSets.test.runtimeClasspath
+    doFirst {
+        manifest {
+            def classpath = sourceSets.test.runtimeClasspath.files
+            attributes "Class-Path": classpath.collect {f -> f.toURI().toString()}.join(" ")
+        }
+    }
+}
+
+bootRun {
+    classpath = classpathJar.outputs.files
+}
+
+bootJar {
+    archiveBaseName = "base-application"
+    destinationDirectory = project(":application").getBuildDir()
+
+}
+
+dependencies {
+    implementation project(":application:core")
+    implementation project(":application:infrastructure")
+
+    implementation libs.spring_boot
+    implementation libs.security
+
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    testImplementation libs.test
+}

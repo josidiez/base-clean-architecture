@@ -1,0 +1,15 @@
+
+
+dependencies {
+    implementation project(":application:core")
+
+    implementation libs.spring_boot
+    implementation libs.security
+    implementation libs.database
+    implementation libs.api
+
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+    testImplementation libs.test
+}

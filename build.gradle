@@ -1,14 +1,14 @@
 
-
 plugins {
-    id 'org.springframework.boot' version '2.4.5'
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id "com.palantir.git-version" version "0.12.1"
 }
 
 group = 'com.base.project'
-version = getVersion()
+// For production environment add automatic version
+version = '0.0.1-SNAPSHOT'
+println "Build Version = ${version ?: '[none]'}"
 sourceCompatibility = '11'
 
 configurations {
@@ -24,19 +24,20 @@ repositories {
 }
 
 ext {
+    springbootVersion=springbootVersion
+    gradleWrapperVersion = ext.gradleVersion
 
     ext.libs = [
             spring_boot            : [
-                    'org.springframework.boot:spring-boot-starter-hateoas',
-                    'org.springframework.boot:spring-boot-starter-web'
+                    'org.springframework.boot:spring-boot-starter-web:2.4.5'
             ],
 
             security             : [
-                    'spring-boot-starter-security'
+                    'org.springframework.boot:spring-boot-starter-security:2.4.5'
             ],
 
             test             : [
-                    'org.springframework.boot:spring-boot-starter-test'
+                    'org.springframework.boot:spring-boot-starter-test:2.4.5'
             ],
 
             api           : [
@@ -45,15 +46,11 @@ ext {
             ],
 
             database: [
-                    'com.h2database:h2'
-            ],
-
-            string_utils           : [
-                    'org.apache.commons:commons-lang3:3.9'
+                    'com.h2database:h2:1.4.200'
             ],
 
             lombok                    : [
-                    'org.projectlombok:lombok'
+                    'org.projectlombok:lombok:${lombokVersion}'
             ]
     ]
 }
@@ -61,19 +58,17 @@ ext {
 allprojects  {
 
     apply plugin: 'java'
-    apply plugin: 'io.spring.dependency-management'
-
-    group = 'com.base.project'
-    println "Build Version = ${version ?: '[none]'}"
     apply plugin: 'application'
+
     mainClassName = 'de.personio.hr.hyerarchy.HyerarquyApplication'
 
     repositories {
         mavenCentral()
     }
 
+    test {
+        useJUnitPlatform()
+    }
 }
 
-test {
-    useJUnitPlatform()
-}
+
