@@ -1,4 +1,4 @@
-
+description = "Entities (domain objects) and uses cases that implement the business logic"
 
 dependencies {
 

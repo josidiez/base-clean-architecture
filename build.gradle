@@ -24,33 +24,33 @@ repositories {
 }
 
 ext {
-    springbootVersion=springbootVersion
     gradleWrapperVersion = ext.gradleVersion
 
     ext.libs = [
             spring_boot            : [
-                    'org.springframework.boot:spring-boot-starter-web:2.4.5'
+                    "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
             ],
 
             security             : [
-                    'org.springframework.boot:spring-boot-starter-security:2.4.5'
+                    "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
             ],
 
             test             : [
-                    'org.springframework.boot:spring-boot-starter-test:2.4.5'
+                    "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+
             ],
 
             api           : [
-                    'io.springfox:springfox-swagger2:2.9.2',
-                    'io.springfox:springfox-swagger-ui:2.9.2'
+                    "io.springfox:springfox-swagger2:${swaggerVersion}",
+                    "io.springfox:springfox-swagger-ui:${swaggerVersion}"
             ],
 
             database: [
-                    'com.h2database:h2:1.4.200'
+                    "com.h2database:h2:${h2Version}"
             ],
 
             lombok                    : [
-                    'org.projectlombok:lombok:${lombokVersion}'
+                    "org.projectlombok:lombok:${lombokVersion}"
             ]
     ]
 }
